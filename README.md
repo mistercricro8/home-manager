@@ -1,3 +1,2 @@
-Had to happen didn't it...
-
-*Nothing very useful here, all config is probably really bad since I'm still new to NixOS*
+Still suffering with the softlink from home.nix that i want in the flake but not on github
+Git's intent-to-add is an okay solution but flakes using git is kind of eh
