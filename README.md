@@ -1,0 +1,3 @@
+Had to happen didn't it...
+
+*Nothing very useful here, all config is probably really bad since I'm still new to NixOS*
