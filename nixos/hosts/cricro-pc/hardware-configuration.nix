@@ -29,6 +29,11 @@
       fsType = "ext4";
     };
 
+  fileSystems."/home/cricro/LaEsquinaStore" =
+    { device = "/dev/disk/by-uuid/D624289724287C9D";
+      fsType = "ntfs";
+    };
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

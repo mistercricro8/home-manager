@@ -88,26 +88,26 @@
     wrapperFeatures.gtk = true;
   };
 
-  programs.uwsm = {
-    enable = true;
-    waylandCompositors = {
-      sway = {
-        prettyName = "sway :>";
-        comment = "it good";
-        binPath = "/run/current-system/sw/bin/sway";
-      };
-      hyprland = {
-        prettyName = "the damned hyprland";
-        comment = "not gonna sugarcoat it";
-        binPath = "/run/current-system/sw/bin/Hyprland";
-      };
-      plasma = {
-        prettyName = "plasma";
-        comment = "good ol reliable";
-        binPath = "/run/current-system/sw/bin/plasmashell";
-      };
-    };
-  };
+  # programs.uwsm = {
+  #   enable = true;
+  #   waylandCompositors = {
+  #     sway = {
+  #       prettyName = "sway :>";
+  #       comment = "it good";
+  #       binPath = "/run/current-system/sw/bin/sway";
+  #     };
+  #     hyprland = {
+  #       prettyName = "the damned hyprland";
+  #       comment = "not gonna sugarcoat it";
+  #       binPath = "/run/current-system/sw/bin/Hyprland";
+  #     };
+  #     plasma = {
+  #       prettyName = "plasma";
+  #       comment = "good ol reliable";
+  #       binPath = "/run/current-system/sw/bin/plasmashell";
+  #     };
+  #   };
+  # };
 
   # services.greetd = {
   #   enable = true;
@@ -145,9 +145,12 @@
     users.cricro = {
       isNormalUser = true;
       description = "Christian";
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = [ "networkmanager" "wheel" "cdrom" ];
       packages = with pkgs; [
       ];
+    };
+    users.LaEsquina = {
+      isNormalUser = true;
     };
   };
 
@@ -159,6 +162,46 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  # Docker
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+
+  # Samba because windows
+  services.samba = {
+    enable = true;
+    openFirewall = true;
+    settings = {
+      global = {
+        "workgroup" = "WORKGROUP";
+        "security" = "user";
+      };
+      "files" = {
+        "path" = "/home/cricro/LaEsquinaStore/laesquina-management/files";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "LaEsquina";
+      };
+      "Archivos" = {
+        "path" = "/home/cricro/LaEsquinaStore/Archivos";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "LaEsquina";
+      };
+    };
+  };
+
+  services.samba-wsdd = {
+    enable = true;
+    openFirewall = true;
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
