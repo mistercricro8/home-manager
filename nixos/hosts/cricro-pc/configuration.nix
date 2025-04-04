@@ -18,6 +18,7 @@
       device = "nodev";
       useOSProber = true;
       efiSupport = true;
+      default = "saved";
     };
     loader.efi.canTouchEfiVariables = true;
     kernelPackages = pkgs.linuxPackages;
